@@ -47,8 +47,8 @@ def plot_filter_result(filtered_state_means, filtered_state_covariances):
             test = True
         ax_t = ax[i // 2, (i) % 2]
         l1, = ax_t.plot(filtered_state_means[:, i], color='blue')
-        l2, = ax_t.plot(filtered_state_means[1:, i] + np.sqrt(filtered_state_covariances[1:, i, i]) * 2, color='r')
-        ax_t.plot(filtered_state_means[:, i] - np.sqrt(filtered_state_covariances[1:, i, i]) * 2, color='r')
+        l2, = ax_t.plot(filtered_state_means[:, i] + np.sqrt(filtered_state_covariances[:, i, i]) * 2, color='r')
+        ax_t.plot(filtered_state_means[:, i] - np.sqrt(filtered_state_covariances[:, i, i]) * 2, color='r')
         ax_t.title.set_text(ftitle[i])
     plt.tight_layout()
     plt.show()
