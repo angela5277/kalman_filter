@@ -53,6 +53,10 @@ def backtest_portfolios(option_outsample_data, x_series, s_series, index_forecas
                 (put_option_data_tmr['expiration'] == atm_put_today['expiration'])
             ]
 
+            # if tmr data is missing
+            atm_call_tmr = atm_call_today if len(atm_call_tmr) == 0 else atm_call_tmr
+            atm_put_tmr = atm_put_today if len(atm_put_tmr) == 0 else atm_put_tmr
+
             short_straddle_log_return_actual = log_return(
                 ['short', 'short'],
                 [atm_call_today['last'], atm_put_today['last']],
