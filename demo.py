@@ -72,6 +72,8 @@ if __name__ == '__main__' :
     # predict insample and outsample
     filtered_state_means, filtered_state_covariances = kf_model.filter(impliedvol_obs_timeseries, matrice_g_timeseries)
 
+    plot_filter_result(filtered_state_means,filtered_state_covariances)
+
     # cut-off date for backtesting
     cutoff_date = option_outsample_data.iloc[0]['quotedate']
     date_series = sorted(set(option_all_data['quotedate']))
@@ -82,7 +84,7 @@ if __name__ == '__main__' :
 
     # backtest, have bug in finding tmr option data
     backtest_result = backtest_portfolios(option_outsample_data, filtered_state_means[cutoff_idx:], filtered_state_covariances[cutoff_idx:], index_forecast)
-    for x in ['short_straddle', 'long_rr_log', 'long_bf']:
+    for x in ['short_straddle', 'long_rr', 'long_bf']:
         print(x)
         print('Mean squared error: %.4f'
               % mean_squared_error(backtest_result[x+'_log_return_actuals'], backtest_result[x+'_log_return_predicts']))
